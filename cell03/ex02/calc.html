@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator</title>
+  <style>
+    body {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .calculator {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 10px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .op {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    input[type="number"], select {
+        width: 30%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+    }
+
+    select {
+        width: 20%;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #333;
+    }
+  </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <form class="calculator" id="calculatorForm">
+        <div class="op">
+            <input type="number" id="left" placeholder="LeftNumber" min="0" required>
+            <select id="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+                <option value="%">%</option>
+            </select>
+            <input type="number" id="right" placeholder="RightNumber" min="0" required>
+        </div>
+        <input type="submit" value="Try me!">
+    </form>
+
+    <script>
+        const form = document.getElementById("calculatorForm")
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault()
+
+            const left = parseInt(document.getElementById("left").value)
+            const right = parseInt(document.getElementById("right").value)
+            const operator = document.getElementById("operator").value
+
+            if (isNaN(left) || isNaN(right) || left < 0 || right < 0) {
+                alert("Error :(")
+                return
+            }
+
+            if ((operator === "/" || operator === "%") &&right === 0) {
+                alert("It's over 9000!")
+                console.log("It's over 9000!")
+                return
+            }
+
+            let result
+            switch(operator) {
+                case '+':
+                result = left + right
+                break
+                case '-':
+                result = left - right
+                break
+                case '*':
+                result = left * right
+                break
+                case '/':
+                result = left / right
+                break
+                case '%':
+                result = left % right
+                break
+            }
+
+            setInterval(() => {
+                alert("Please, use me...")
+            },30000)
+        
+            alert(`${left} ${operator} ${right} =  ${result}` )
+            console.log(`${left} ${operator} ${right} =  ${result}` )
+        })
+
+    </script>
+</body>
+</html>
